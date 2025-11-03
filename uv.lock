@@ -159,7 +159,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "baml-cli", specifier = ">=0.1.0" },
-    { name = "baml-py", specifier = ">=0.211.2" },
+    { name = "baml-py", specifier = "==0.211.2" },
     { name = "litellm", specifier = ">=1.79.1" },
     { name = "pydantic", specifier = ">=2.12.3" },
     { name = "pyvis", specifier = ">=0.3.2" },

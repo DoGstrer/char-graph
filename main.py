@@ -1,28 +1,12 @@
 from baml_client.sync_client import b
 from baml_client.types import Characters
-from baml_py import Collector, ClientRegistry
+from baml_py import Collector
 from pyvis.network import Network
 import pickle
-import litellm
-from litellm import get_max_tokens, token_counter, encode, decode, register_model
+from litellm import get_max_tokens, token_counter, encode, decode
 import os
 from pathlib import Path
 from typing import List
-
-litellm.register_model({
-    "granite4:micro":{
-        "max_tokens": 128000,
-        "litellm_provider": "ollama"
-    }
-})
-
-litellm.register_model({
-    "gemma3:1b":{
-        "max_tokens": 4096,
-        "litellm_provider": "ollama"
-    }
-})
-
 
 net = Network(height="750px", width="100%", bgcolor="#222222", font_color="white")
 net.barnes_hut()
@@ -36,12 +20,11 @@ weight = {
     "OUTER_CIRCLE": 0.2
 }
 
-FILE_PATH = Path("./docs/sample.txt")
+FILE_PATH = Path("./docs/little_woman.txt")
 TITLE = FILE_PATH.name.split(".")[0]
 LLM_RESULTS_CACHE = Path(f'./result_cache/{TITLE}.pickle')
 GRAPH_PATH = Path(f'./graphs/{TITLE}.html')
 TRUNCATE_MARGIN = 0.75
-MODEL_TYPE = "CUSTOM"
 
 def get_file_content(file_path: Path) -> str:
     if file_path.exists():
@@ -62,14 +45,37 @@ def input_truncate(content: str, model, token_count) -> str:
     truncated_content = decode(tokens=tokens[:int(token_count)], model=model)
     return truncated_content
 
-def get_character_relationship(content: str, llm_client) -> List[Characters]:
+def chunk_input(content: str, model: str, chunk_size: int) -> List[str]:
+    tokens = encode(model=model, text=content)
+    chunked_content = [decode(tokens=tokens[i: i+chunk_size], model=model) for i in range(0, len(tokens), chunk_size)]
+    return chunked_content
+
+def get_character_relationship(content: str) -> List[Characters]:
     if LLM_RESULTS_CACHE.exists():
         results = pickle.loads(LLM_RESULTS_CACHE.read_bytes())
     else:
-        results = b.CharacterRelationships(content, baml_options = {"collector":collector, "client_registry": llm_client})
+        input_token_count=calculate_tokens(content, model)
+
+        #Check if content satisfies input token constraint
+        if input_token_count > (model_max_tokens*TRUNCATE_MARGIN):
+            max_input_tokens = TRUNCATE_MARGIN*model_max_tokens
+            chunk_size = int(max_input_tokens/2)
+            print(f"Input token count {input_token_count} exceeds {model}'s max token limit of {model_max_tokens}")
+            print(f"chunking input into {chunk_size}")
+            #content = input_truncate(content, token_count = TRUNCATE_MARGIN*model_max_tokens, model=model)
+            content = chunk_input(content, model=model, chunk_size=chunk_size)
+        else:
+            content = [content]
+        
+        prev_output = []
+        for chunk in content:
+            results = b.CharacterRelationships(txt=chunk, prev_output=prev_output, baml_options = {"collector":collector})
+            prev_output = results
+            print(collector.last.usage)
+        
         with LLM_RESULTS_CACHE.open('wb') as f:
             pickle.dump(results, f)
-        print(collector.last.usage)
+        print(collector.usage)
     return results
 
 def generate_graph_visualization(relationships: List[Characters]):
@@ -84,56 +90,13 @@ def generate_graph_visualization(relationships: List[Characters]):
 
 if __name__ == "__main__":
     #LLM Client Instantiation
-
-    llm_client = ClientRegistry()
-
-    llm_client.add_llm_client(
-        name="GPT5Nano",
-        provider="openai-responses",
-        options={
-            "model":"gpt-5-nano",
-            "temperature":1.0,
-            "api_key":os.environ["OPENAI_API_KEY"]
-        }
-    )
-
-    llm_client.add_llm_client(
-        name="granite4",
-        provider="openai-generic",
-        options={
-            "base_url":"http://localhost:11434/v1",
-            "model":"granite4:micro"
-        }
-    )
-
-    llm_client.add_llm_client(
-        name="gemma3_1b",
-        provider="openai-generic",
-        options={
-            "base_url":"http://localhost:11434/v1",
-            "model":"gemma3:1b"
-        }
-    )
-
-    if MODEL_TYPE == "CUSTOM":
-        model = "gemma3:1b"
-        llm_client.set_primary("gemma3_1b")
-    else:
-        model = "gpt-5-nano"
-        llm_client.set_primary("GPT4Nano")
+    model = "gpt-5-nano"
     
     model_max_tokens = get_max_tokens(model)
     
     #input
     content = get_file_content(file_path=FILE_PATH)
-    input_token_count=calculate_tokens(content, model)
-
-    if input_token_count > (model_max_tokens*TRUNCATE_MARGIN):
-        print(f"Input token count {input_token_count} exceeds {model}'s max token limit of {model_max_tokens}")
-        print(f"Truncating input to {TRUNCATE_MARGIN*model_max_tokens}")
-        content = input_truncate(content, token_count = TRUNCATE_MARGIN*model_max_tokens, model=model)
-
     
-    relationships = get_character_relationship(content, llm_client)
+    relationships = get_character_relationship(content)
     generate_graph_visualization(relationships)
     net.show(str(GRAPH_PATH.absolute()), notebook=False)

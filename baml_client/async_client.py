@@ -79,19 +79,19 @@ class BamlAsyncClient:
     def parse_stream(self):
       return self.__llm_stream_parser
     
-    async def CharacterRelationships(self, txt: str,
+    async def CharacterRelationships(self, txt: str,prev_output: typing.List["types.Characters"],
         baml_options: BamlCallOptions = {},
     ) -> typing.List["types.Characters"]:
         # Check if on_tick is provided
         if 'on_tick' in baml_options:
             # Use streaming internally when on_tick is provided
-            stream = self.stream.CharacterRelationships(txt=txt,
+            stream = self.stream.CharacterRelationships(txt=txt,prev_output=prev_output,
                 baml_options=baml_options)
             return await stream.get_final_response()
         else:
             # Original non-streaming code
             result = await self.__options.merge_options(baml_options).call_function_async(function_name="CharacterRelationships", args={
-                "txt": txt,
+                "txt": txt,"prev_output": prev_output,
             })
             return typing.cast(typing.List["types.Characters"], result.cast_to(types, types, stream_types, False, __runtime__))
     
@@ -103,11 +103,11 @@ class BamlStreamClient:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    def CharacterRelationships(self, txt: str,
+    def CharacterRelationships(self, txt: str,prev_output: typing.List["types.Characters"],
         baml_options: BamlCallOptions = {},
     ) -> baml_py.BamlStream[typing.List["stream_types.Characters"], typing.List["types.Characters"]]:
         ctx, result = self.__options.merge_options(baml_options).create_async_stream(function_name="CharacterRelationships", args={
-            "txt": txt,
+            "txt": txt,"prev_output": prev_output,
         })
         return baml_py.BamlStream[typing.List["stream_types.Characters"], typing.List["types.Characters"]](
           result,
@@ -123,11 +123,11 @@ class BamlHttpRequestClient:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    async def CharacterRelationships(self, txt: str,
+    async def CharacterRelationships(self, txt: str,prev_output: typing.List["types.Characters"],
         baml_options: BamlCallOptions = {},
     ) -> baml_py.baml_py.HTTPRequest:
         result = await self.__options.merge_options(baml_options).create_http_request_async(function_name="CharacterRelationships", args={
-            "txt": txt,
+            "txt": txt,"prev_output": prev_output,
         }, mode="request")
         return result
     
@@ -138,11 +138,11 @@ class BamlHttpStreamRequestClient:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
-    async def CharacterRelationships(self, txt: str,
+    async def CharacterRelationships(self, txt: str,prev_output: typing.List["types.Characters"],
         baml_options: BamlCallOptions = {},
     ) -> baml_py.baml_py.HTTPRequest:
         result = await self.__options.merge_options(baml_options).create_http_request_async(function_name="CharacterRelationships", args={
-            "txt": txt,
+            "txt": txt,"prev_output": prev_output,
         }, mode="stream")
         return result
     

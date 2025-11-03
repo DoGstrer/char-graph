@@ -16,12 +16,18 @@ class Characters{
   relationships Relationship[] @description(#"A list of relationships the character has with other characters in the story."#)
 }
 
-function CharacterRelationships(txt: string) -> Characters[] {
+function CharacterRelationships(txt: string, prev_output: Characters[]) -> Characters[] {
   client CustomGPT5Nano
   prompt #"
-  Given the following text, identify the main characters and describe their relationships with each other.
-  {{txt}}
-  {{ctx.output_format}}
+    {% if not prev_output %}
+    Given the following text, identify the main characters and describe their relationships with each other.
+    <text>{{txt}}</text>
+    {% else %}
+    Given the following text and previous output, identify the main characters and describe their relationships with each other and output updated previous output.
+    <text>{{txt}}</text>
+    <previous>{{prev_output}}</previous>
+    {% endif %}
+    {{ctx.output_format}}
   "#
 
 }
