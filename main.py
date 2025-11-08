@@ -1,5 +1,5 @@
 from baml_client.sync_client import b
-from baml_client.types import Characters
+from baml_client.types import Characters, Chapter
 from baml_py import Collector
 from pyvis.network import Network
 import pickle
@@ -88,15 +88,46 @@ def generate_graph_visualization(relationships: List[Characters]):
             net.add_node(dst, dst, title=dst)
             net.add_edge(src, dst, value=weight[wt])
 
+def get_chapters(content: str) -> List[Chapter]:
+    if LLM_RESULTS_CACHE.exists():
+        results = pickle.loads(LLM_RESULTS_CACHE.read_bytes())
+    else:
+        input_token_count=calculate_tokens(content, model)
+
+        #Check if content satisfies input token constraint
+        if input_token_count > (model_max_tokens*TRUNCATE_MARGIN):
+            max_input_tokens = TRUNCATE_MARGIN*model_max_tokens
+            chunk_size = int(max_input_tokens/2)
+            print(f"Input token count {input_token_count} exceeds {model}'s max token limit of {model_max_tokens}")
+            print(f"chunking input into {chunk_size}")
+            #content = input_truncate(content, token_count = TRUNCATE_MARGIN*model_max_tokens, model=model)
+            content = chunk_input(content, model=model, chunk_size=chunk_size)
+        else:
+            content = [content]    
+        
+        prev_output = []
+        for chunk in content:
+            results = b.ChapterBoundaries(txt=chunk, prev_output=prev_output, baml_options = {"collector":collector})
+            prev_output = results
+            print(collector.last.usage)
+        
+        with LLM_RESULTS_CACHE.open('wb') as f:
+            pickle.dump(results, f)
+        print(collector.usage)
+
+    return results
+
 if __name__ == "__main__":
     #LLM Client Instantiation
     model = "gpt-5-nano"
-    
+    #
     model_max_tokens = get_max_tokens(model)
-    
-    #input
+    #
+    ##input
     content = get_file_content(file_path=FILE_PATH)
-    
-    relationships = get_character_relationship(content)
-    generate_graph_visualization(relationships)
-    net.show(str(GRAPH_PATH.absolute()), notebook=False)
+    #
+    #relationships = get_character_relationship(content)
+    #generate_graph_visualization(relationships)
+    #net.show(str(GRAPH_PATH.absolute()), notebook=False)
+    chapters = get_chapters(content)
+    print(chapters)

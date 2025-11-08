@@ -24,6 +24,12 @@ class LlmResponseParser:
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
 
+    def ChapterBoundaries(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> typing.List["types.Chapter"]:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="ChapterBoundaries", llm_response=llm_response, mode="request")
+        return typing.cast(typing.List["types.Chapter"], result)
+
     def CharacterRelationships(
         self, llm_response: str, baml_options: BamlCallOptions = {},
     ) -> typing.List["types.Characters"]:
@@ -37,6 +43,12 @@ class LlmStreamParser:
 
     def __init__(self, options: DoNotUseDirectlyCallManager):
         self.__options = options
+
+    def ChapterBoundaries(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> typing.List["stream_types.Chapter"]:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="ChapterBoundaries", llm_response=llm_response, mode="stream")
+        return typing.cast(typing.List["stream_types.Chapter"], result)
 
     def CharacterRelationships(
         self, llm_response: str, baml_options: BamlCallOptions = {},

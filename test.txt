@@ -1,0 +1,124 @@
+[
+    Chapter(
+        title='Romeo and Juliet', 
+        number=1, 
+        start_boundary_text='ACT I', 
+        end_boundary_text='ACT II', 
+        characters=[
+            Characters(name='ROMEO', role='protagonist', 
+                relationships=[
+                    Relationship(name='ROSALINE', type='unrequited love', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>), 
+                    Relationship(name='BENVOLIO', type='friendship', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='MERCUTIO', type='friendship', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='TYBALT', type='enmity', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='family/foe (feud)', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='MONTAGUE', type='family', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)
+                    ]), 
+            Characters(name='JULIET', role='deuteragonist', 
+                relationships=[
+                    Relationship(name='NURSE', type='caregiver/confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='PARIS', type='suitor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)
+                    ]), 
+            Characters(name='NURSE', role='nurse to Juliet', 
+                relationships=[
+                    Relationship(name='JULIET', type='caregiver/ward', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='employer/guardian', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)
+                    ]), 
+            Characters(name='CAPULET', role="Juliet's father", 
+                relationships=[
+                    Relationship(name='JULIET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='PARIS', type='suitor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='MONTAGUE', type='rivalry/enmity', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)
+                    ]), 
+            Characters(name='PARIS', role='suitor to Juliet', 
+                relationships=[
+                    Relationship(name='CAPULET', type='guardian/foe', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='JULIET', type='fiancé-to-be', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)
+                    ]), 
+            Characters(name='MONTAGUE', role="Romeo's father", 
+                relationships=[
+                    Relationship(name='ROMEO', type='father-son', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='rivalry', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)
+                    ]), 
+            Characters(name='ROMEO (Boundary Participant)', role='see ROMEO above', relationships=[])]), 
+    Chapter(
+        title='Romeo and Juliet', 
+        number=2, 
+        start_boundary_text='ACT II', 
+        end_boundary_text='ACT III', 
+        characters=[
+            Characters(name='ROMEO', role='protagonist', '
+                relationships=[
+                    Relationship(name='JULIET', type='romance', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='BENVOLIO', type='friend', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='MERCUTIO', type='friend', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='FRIAR LAWRENCE', type='mentor/advisor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='family/foe', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='PARIS', type='foe (via feud)', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='JULIET', role='protagonist', 
+                relationships=[
+                    Relationship(name='ROMEO', type='romance', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='NURSE', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='FRIAR LAWRENCE', type='confidant/mentor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='PARIS', type='fiancé/antagonist', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='FRIAR LAWRENCE', role='confessor/mentor', 
+                relationships=[
+                    Relationship(name='ROMEO', type='mentor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='JULIET', type='confidante/ward', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='NURSE', type='ally/mediator', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='NURSE', role='confidante to Juliet', 
+                relationships=[
+                    Relationship(name='JULIET', type='confidante/ward', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='ROMEO', type='messenger/secret liaison', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>), 
+                    Relationship(name='CAPULET', type='employer/guardian', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='CAPULET', role="Juliet's father", 
+                relationships=[
+                    Relationship(name='JULIET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='PARIS', type='suitor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='MONTAGUE', type='rivalry/enmity', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='MONTAGUE', role="Capulet's foe? (rivalry context reflects feud)", 
+                relationships=[
+                    Relationship(name='ROMEO', type='son', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='rivalry', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='PARIS', role="Juliet's fiancé", 
+                relationships=[
+                    Relationship(name='JULIET', type='fiancé', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), 
+                    Relationship(name='CAPULET', type='guardian/arranger', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)
+                    ])
+            ]), 
+    Chapter(
+        title='Romeo and Juliet', 
+        number=3, 
+        start_boundary_text='ACT III', 
+        end_boundary_text='ACT IV', 
+        characters=[
+            Characters(name='ROMEO', role='protagonist', relationships=[Relationship(name='JULIET', type='romance', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='MERCUTIO (dead)', type='friend (dead)', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='TYBALT', type='enemy (feud)', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='enemy/failure of feud', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='JULIET', role='protagonist', relationships=[Relationship(name='ROMEO', type='romance', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='NURSE', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='CAPULET', type='parent', weight=<Weight.ACQUAINTANCE: 'Ae', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='NURSE', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='CAPULET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='fiancé/antagonist', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='FRIAR LAWRENCE', role='confessor/mentor', relationships=[Relationship(name='ROMEO', type='confessor/guide', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='JULIET', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='mediator? (plan)', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), Characters(name='NURSE', role='confidante to Juliet', relationships=[Relationship(name='JULIET', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='ROMEO', type='messenger/secret liaison', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='CAPULET', role="Juliet's father", relationships=[Relationship(name='JULIET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='suitor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), Characters(name='MONTAGUE', role="Romeo's father/Capulet foe context", relationships=[Relationship(name='ROMEO', type='son', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='CAPULET', type='rivalry', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), Characters(name='TYBALT', role='Capulet', relationships=[Relationship(name='ROMEO', type='enemy', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)])]), 
+    Chapter(
+        title='Romeo and Juliet', 
+        number=4, 
+        start_boundary_text='ACT IV', 
+        end_boundary_text='ACT V', 
+        characters=[
+            Characters(name='JULIET', role='protagonist', relationships=[Relationship(name='FRIAR LAWRENCE', type='confidant/mentor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='NURSE', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='fiancé/antagonist', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='FRIAR LAWRENCE', role='confessor/mentor', relationships=[Relationship(name='JULIET', type='confidante/ward', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='plan confidant/mediator', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>), Relationship(name='ROMEO', type='confessor/partner in plan', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='PARIS', role='fiancé', relationships=[Relationship(name='JULIET', type='fiancé', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='CAPULET', type='guardian', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='NURSE', role='confidante to Juliet', relationships=[Relationship(name='JULIET', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='ROMEO', type='secret liaison', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='CAPULET', role='father', relationships=[Relationship(name='JULIET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='suitor', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='ROMEO', role='protagonist', relationships=[Relationship(name='JULIET', type='romance', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='NURSE', type='ally via Juliet', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)])]), 
+    Chapter(
+        title='Romeo and Juliet', 
+        number=5, 
+        start_boundary_text='ACT V', 
+        end_boundary_text='*** END OF THE PROJECT GUTENBERG EBOOK ROMEO AND JULIET ***', 
+        characters=[
+            Characters(name='ROMEO', role='protagonist', relationships=[Relationship(name='JULIET', type='romance/death union', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='APOTHECARY', type='supplier', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>), Relationship(name='FRIAR LAWRENCE', type='confessor/ally', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='PARIS', type='enemy/deceased', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='JULIET', role='protagonist', relationships=[Relationship(name='ROMEO', type='romance/death union', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='NURSE', type='confidante', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='CAPULET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)]), 
+            Characters(name='FRIAR LAWRENCE', role='confessor/mentor', relationships=[Relationship(name='ROMEO', type='confessor/guide', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='JULIET', type='confidante/ally', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='NURSE', type='ally', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='NURSE', role='confidante to Juliet', relationships=[Relationship(name='JULIET', type='confidante/ward', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='ROMEO', type='secret intermediary', weight=<Weight.OUTER_CIRCLE: 'OUTER_CIRCLE'>)]), 
+            Characters(name='CAPULET', role='father', relationships=[Relationship(name='JULIET', type='parent', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>), Relationship(name='ROMEO', type='foe (feud context)', weight=<Weight.ACQUAINTANCE: 'ACQUAINTANCE'>)])])
+]

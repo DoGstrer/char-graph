@@ -16,6 +16,9 @@ from . import stream_types
 
 type_map = {
 
+    "types.Chapter": types.Chapter,
+    "stream_types.Chapter": stream_types.Chapter,
+
     "types.Characters": types.Characters,
     "stream_types.Characters": stream_types.Characters,
 

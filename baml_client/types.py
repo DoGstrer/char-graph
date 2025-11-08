@@ -46,8 +46,15 @@ class Weight(str, Enum):
     INNER_CIRCLE = "INNER_CIRCLE"
 
 # #########################################################################
-# Generated classes (2)
+# Generated classes (3)
 # #########################################################################
+
+class Chapter(BaseModel):
+    title: str
+    number: int
+    start_boundary_text: str
+    end_boundary_text: str
+    characters: typing.List["Characters"]
 
 class Characters(BaseModel):
     name: str
